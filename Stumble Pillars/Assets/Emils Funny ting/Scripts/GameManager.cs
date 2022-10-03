@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         {
             playerOneCameraPosition = playerOneCamera.transform.position;
             playerOneCameraPosition.y += 1f;
-            playerOneCamera.transform.position = playerOneCameraPosition * Time.deltaTime * 2;
+            playerOneCamera.transform.position += Vector3.up;
             pieceCount = 0;
         }
     }
