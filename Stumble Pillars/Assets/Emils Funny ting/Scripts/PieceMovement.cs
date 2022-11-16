@@ -27,6 +27,6 @@ public class PieceMovement : MonoBehaviour
         speed = 0;
         GameObject go = GameObject.FindGameObjectWithTag("Icon");
         Destroy(go);
-        gameObject.tag = "PlacedPiece";
+        gameObject.tag = "Untagged";
     }
 }

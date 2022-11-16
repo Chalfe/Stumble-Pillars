@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public float boxWidth;
+    public float pieceDistance;
+    public float maxPieceDistance;
+    Vector3 cameraPosition = Vector3.zero;
+    Vector3 currentSpeed = Vector3.zero;
     #region variables
     public List<GameObject> pieceList = new List<GameObject>();
-    private GameObject playerOneCamera;
-    Vector3 playerOneCameraPosition = Vector3.zero;
     private int livesPlayerOne;
     private int livesPlayerTwo;
     private int currentPiece;
@@ -15,11 +18,30 @@ public class GameManager : MonoBehaviour
     private int pieceCount;
     #endregion
     private void Start() { newGame(); }
-    private void Update() { if (GameObject.FindGameObjectWithTag("CurrentPiece") == null) newPiece(); }
+    private void Update() 
+    {
+        RaycastHit2D hit;
+        if (hit = Physics2D.BoxCast(transform.position, new Vector2(boxWidth, 1), 0, Vector2.down, Mathf.Infinity))
+        {
+            if (hit.transform.tag != "CurrentPiece" && hit.distance < pieceDistance)
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, new Vector3(0, cameraPosition.y + pieceDistance + 4, -10), ref currentSpeed, 1);
+                cameraPosition = transform.position;
+            }
+
+            if (hit.transform.tag != "CurrentPiece" && hit.distance > maxPieceDistance)
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, new Vector3(0, cameraPosition.y - maxPieceDistance, -10), ref currentSpeed, 1);
+                cameraPosition = transform.position;
+            }
+
+        }
+
+        if (GameObject.FindGameObjectWithTag("CurrentPiece") == null) newPiece(); 
+    
+    }
     private void newGame()
     {
-        playerOneCamera = GameObject.Find("Main Camera");
-        pieceCount = 0;
         nextPiece = 1;
         setLivesPlayerOne(3);
         setLivesPlayerTwo(3);
@@ -32,13 +54,6 @@ public class GameManager : MonoBehaviour
         showPiece(pieceList[nextPiece]);
         if (currentPiece < 13) currentPiece++; else currentPiece = 0;
         if (nextPiece < 13) nextPiece++; else nextPiece = 0;
-        if (pieceCount > 4) 
-        {
-            playerOneCameraPosition = playerOneCamera.transform.position;
-            playerOneCameraPosition.y += 1f;
-            playerOneCamera.transform.position += Vector3.up;
-            pieceCount = 0;
-        }
     }
     #region lives 
     private void setLivesPlayerOne(int livesPlayerOne)
@@ -63,14 +78,14 @@ public class GameManager : MonoBehaviour
     }
     private void spawnPiece(GameObject pieceToBeSpawned)
     {
-        GameObject go = (GameObject)Instantiate(pieceToBeSpawned, new Vector2(-6.5f, 4 + playerOneCameraPosition.y), Quaternion.identity);
+        GameObject go = (GameObject)Instantiate(pieceToBeSpawned, new Vector2(0, transform.position.y + 4), Quaternion.identity);
         go.AddComponent(typeof(PieceScript));
         go.tag = "CurrentPiece";
         pieceCount++;
     }
     private void showPiece(GameObject pieceToBeShown)
     {
-        GameObject go = (GameObject)Instantiate(pieceToBeShown, new Vector2(7, 4), Quaternion.identity);
+        GameObject go = (GameObject)Instantiate(pieceToBeShown, new Vector2(transform.position.x + 7, transform.position.y), Quaternion.identity);
         go.tag = "Icon";
     }
 }
