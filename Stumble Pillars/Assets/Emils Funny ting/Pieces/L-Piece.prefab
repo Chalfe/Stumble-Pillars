@@ -255,13 +255,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6824806044384334566}
-<<<<<<< Updated upstream
   - component: {fileID: 3377942817800605912}
   m_Layer: 2
-=======
-  - component: {fileID: 3780245424412041424}
-  m_Layer: 0
->>>>>>> Stashed changes
   m_Name: L-Piece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,8 +281,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &3780245424412041424
-PolygonCollider2D:
+--- !u!68 &3377942817800605912
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -300,24 +295,19 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_EdgeRadius: 0
   m_Points:
-    m_Paths:
-    - - {x: 0.1, y: 0.1}
-      - {x: 1.9, y: 0.1}
-      - {x: 1.9, y: 0.9}
-      - {x: 0.9, y: 0.9}
-      - {x: 0.9, y: 2.9}
-      - {x: 0.1, y: 2.9}
-      - {x: 0.1, y: 0.1}
+  - {x: 0.1, y: 0.1}
+  - {x: 1.9, y: 0.1}
+  - {x: 1.9, y: 0.9}
+  - {x: 0.9, y: 0.9}
+  - {x: 0.9, y: 2.9}
+  - {x: 0.1, y: 2.9}
+  - {x: 0.1, y: 0.1}
+  m_AdjacentStartPoint: {x: 0.7, y: 0}
+  m_AdjacentEndPoint: {x: -0.97, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &5791273209189392676
 GameObject:
   m_ObjectHideFlags: 0
