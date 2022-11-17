@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public Text text;
-    int score;
+    public int score;
     public float boxWidth;
     public float pieceDistance;
     public float maxPieceDistance;

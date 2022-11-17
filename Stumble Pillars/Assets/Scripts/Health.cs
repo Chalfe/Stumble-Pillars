@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Health : MonoBehaviour
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    public GameObject GameOverMenu;
+    public Text ScoreText;
+    public GameManager THING;
     void Start()
     {
         
@@ -45,5 +49,30 @@ public class Health : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+
+        if ( health < 1)
+        {
+            gameOver();
+        }
+
+        void gameOver()
+        {
+            GameOverMenu.SetActive(true);
+            Time.timeScale = 0f;
+            THING = FindObjectOfType<GameManager>();
+            ScoreText.text = ("Your score was " + THING.score);
+        }
+
+
+    }
+
+    public void quit()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
