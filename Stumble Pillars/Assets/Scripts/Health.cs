@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
     public Sprite emptyHeart;
     public GameObject GameOverMenu;
     public Text ScoreText;
+    public Text highScoreText;
     public GameManager THING;
     void Start()
     {
@@ -61,8 +62,11 @@ public class Health : MonoBehaviour
         {
             GameOverMenu.SetActive(true);       
             THING = FindObjectOfType<GameManager>();
-            ScoreText.text = ("Your score was " + THING.score);
+            ScoreText.text = "Your score was " + THING.score;
             THING.GetComponent<GameManager>().enabled = false;
+            highScoreText.text = "Highscore: " + GameManager.highscore;
+            
+            
         }
 
 

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static int highscore;
     public Text text;
     public int score;
     public float boxWidth;
@@ -40,7 +41,9 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (GameObject.FindGameObjectWithTag("CurrentPiece") == null) newPiece(); 
+        if (GameObject.FindGameObjectWithTag("CurrentPiece") == null) newPiece();
+
+        Debug.Log(highscore);
     
     }
     private void newGame()
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
     {
         score = score + addedScore;
         text.text = "Score: " + score.ToString();
+        if (score > highscore) highscore = score;
     }
 
     private void spawnPiece(GameObject pieceToBeSpawned)
