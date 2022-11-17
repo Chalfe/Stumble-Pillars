@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PieceMovement : MonoBehaviour
 {
+    private GameManager thinghy;
     Vector2 piecePosition = Vector2.zero;
     public int speed = 2;
     private void Update()
@@ -28,5 +29,10 @@ public class PieceMovement : MonoBehaviour
         GameObject go = GameObject.FindGameObjectWithTag("Icon");
         Destroy(go);
         gameObject.tag = "Untagged";
+        thinghy = FindObjectOfType<GameManager>();
+        if (collision.transform.tag != "DeadZone")
+        {
+            thinghy.doScore(50);
+        }
     }
 }

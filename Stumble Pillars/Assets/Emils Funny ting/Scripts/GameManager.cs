@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public Text text;
+    int score;
     public float boxWidth;
     public float pieceDistance;
     public float maxPieceDistance;
@@ -42,9 +45,8 @@ public class GameManager : MonoBehaviour
     }
     private void newGame()
     {
+        score = 0;
         nextPiece = 1;
-        setLivesPlayerOne(3);
-        setLivesPlayerTwo(3);
         pieceListGeneration();
         newPiece();
     }
@@ -56,15 +58,6 @@ public class GameManager : MonoBehaviour
         if (nextPiece < 13) nextPiece++; else nextPiece = 0;
     }
     #region lives 
-    private void setLivesPlayerOne(int livesPlayerOne)
-    {
-        this.livesPlayerOne = livesPlayerOne;
-    }
-
-    private void setLivesPlayerTwo(int livesPlayerTwo)
-    {
-        this.livesPlayerTwo = livesPlayerTwo;
-    }
     #endregion 
     private void pieceListGeneration()
     {
@@ -76,6 +69,13 @@ public class GameManager : MonoBehaviour
             pieceList[randomIndex] = temp;
         }
     }
+
+    public void doScore(int addedScore)
+    {
+        score = score + addedScore;
+        text.text = "Score: " + score.ToString();
+    }
+
     private void spawnPiece(GameObject pieceToBeSpawned)
     {
         GameObject go = (GameObject)Instantiate(pieceToBeSpawned, new Vector2(0, transform.position.y + 4), Quaternion.identity);
