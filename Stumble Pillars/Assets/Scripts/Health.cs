@@ -17,13 +17,15 @@ public class Health : MonoBehaviour
     public GameManager THING;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(health > numOfHearts)
+
+
+        if (health > numOfHearts)
         {
             health = numOfHearts;
         }
@@ -57,22 +59,12 @@ public class Health : MonoBehaviour
 
         void gameOver()
         {
-            GameOverMenu.SetActive(true);
-            Time.timeScale = 0f;
+            GameOverMenu.SetActive(true);       
             THING = FindObjectOfType<GameManager>();
             ScoreText.text = ("Your score was " + THING.score);
+            THING.GetComponent<GameManager>().enabled = false;
         }
 
 
-    }
-
-    public void quit()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
-
-    public void retry()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
